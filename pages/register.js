@@ -122,8 +122,6 @@ export default function RegisterPage() {
             </Head>
             <main className="min-h-screen flex items-center justify-center p-4 font-inter">
                 <div className="max-w-[1000px] w-full bg-card-bg rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-[45%_55%] animate-fade-in-up">
-                    {/* --- THIS IS THE FIX --- */}
-                    {/* The "hidden lg:block" classes have been removed */}
                     <div className="relative h-64 lg:h-auto">
                         <div className="absolute inset-0 bg-purple-900 bg-opacity-70 z-10"></div>
                         <img src={wallpapers[currentIndex]} alt="Background" className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out" key={currentIndex} />
@@ -140,7 +138,7 @@ export default function RegisterPage() {
                         </div>
                         
                         {step === 1 && (
-                            <form className="space-y-6" onSubmit={handleSendOtp}>
+                            <form className="space-y-6 animate-fade-in-up" onSubmit={handleSendOtp}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"><input type="text" placeholder="First name" value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent" /><input type="text" placeholder="Last name" value={lastName} onChange={e => setLastName(e.target.value)} className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent" /></div>
                                 <div><input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent" /></div>
                                 <button type="submit" disabled={isLoading} className="w-full bg-accent text-white rounded-lg py-3 font-semibold hover:bg-purple-500 transition-all disabled:opacity-50">{isLoading ? 'Sending...' : 'Send Verification Code'}</button>
@@ -148,7 +146,7 @@ export default function RegisterPage() {
                         )}
 
                         {step === 2 && (
-                            <form className="space-y-6" onSubmit={handleVerifyOtp}>
+                            <form className="space-y-6 animate-fade-in-up" onSubmit={handleVerifyOtp}>
                                 <p className="text-placeholder text-center">We've sent a 6-digit code to <span className="text-white">{email}</span>. Please enter it below.</p>
                                 <div><input type="text" placeholder="123456" value={otp} onChange={e => setOtp(e.target.value)} maxLength="6" className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white text-center tracking-[0.5em] placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent" /></div>
                                 <button type="submit" disabled={isLoading} className="w-full bg-accent text-white rounded-lg py-3 font-semibold hover:bg-purple-500 transition-all disabled:opacity-50">{isLoading ? 'Verifying...' : 'Verify Email'}</button>
@@ -156,7 +154,7 @@ export default function RegisterPage() {
                         )}
                         
                         {step === 3 && !isSuccess && (
-                            <div className="space-y-6">
+                            <div className="space-y-6 animate-fade-in-up">
                                 <p className="text-green-400 text-center font-semibold">Email verified successfully!</p>
                                 <p className="text-center text-placeholder text-sm mb-3">Select password length</p>
                                 <div className="flex justify-center gap-3">{passwordLengths.map(length => (<button key={length} type="button" onClick={() => setSelectedLength(length)} className={`w-12 h-12 bg-input-bg border-2 rounded-lg text-white font-semibold transition-all ${selectedLength === length ? 'border-accent' : 'border-border'}`}>{length}</button>))}</div>
@@ -165,7 +163,7 @@ export default function RegisterPage() {
                         )}
 
                         {isSuccess && (
-                            <div className="text-center">
+                            <div className="text-center animate-fade-in-up">
                                 <p className="text-green-400 font-semibold mb-2">Account created successfully!</p>
                                 <p className="text-placeholder text-sm mb-2">Your new password is:</p>
                                 <div className="flex items-center justify-center gap-4 bg-black/20 p-2 rounded-lg"><p className="text-white text-xl font-bold tracking-widest">{generatedPassword}</p><button onClick={handleCopyPassword} className="bg-accent/80 text-white px-3 py-1 rounded-md text-sm hover:bg-accent" disabled={isCopied}>{isCopied ? 'Copied!' : 'Copy'}</button></div>
@@ -173,7 +171,7 @@ export default function RegisterPage() {
                             </div>
                         )}
 
-                        {error && (<div className="mt-4 text-center"><p className="text-red-400 font-semibold">{error}</p></div>)}
+                        {error && (<div className="mt-4 text-center animate-fade-in-up"><p className="text-red-400 font-semibold">{error}</p></div>)}
                     </div>
                 </div>
             </main>

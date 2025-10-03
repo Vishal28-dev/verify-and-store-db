@@ -23,7 +23,7 @@ export default function LoginPage() {
         return () => clearInterval(slideInterval);
     }, []);
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
@@ -39,7 +39,7 @@ export default function LoginPage() {
                 throw new Error(data.error || 'Login failed.');
             }
             router.push(`/dashboard?name=${data.firstName}`);
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message);
         } finally {
             setIsLoading(false);
@@ -53,7 +53,7 @@ export default function LoginPage() {
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
             </Head>
             <main className="min-h-screen flex items-center justify-center p-4 font-inter">
-                <div className="max-w-[1000px] w-full bg-card-bg rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-[45%_55%] animate-fade-in-up" style={{ '--delay': '0s' }}>
+                <div className="max-w-[1000px] w-full bg-card-bg rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-[45%_55%] animate-fade-in-up">
                     
                     <div className="relative h-64 lg:h-auto hidden lg:block">
                         <div className="absolute inset-0 bg-purple-900 bg-opacity-70 z-10"></div>
@@ -71,34 +71,29 @@ export default function LoginPage() {
 
                     <div className="p-8 lg:p-12">
                         <div className="mb-8">
-                            <h1 className="text-white text-2xl lg:text-3xl font-semibold mb-2">Welcome Back</h1>
-                            <p className="text-placeholder">
+                            <h1 className="text-white text-2xl lg:text-3xl font-semibold mb-2 animate-fade-in-up">Welcome Back</h1>
+                            <p className="text-placeholder animate-fade-in-up">
                                 Don't have an account?{' '}
                                 <a href="/register" className="text-accent hover:underline">Sign up</a>
                             </p>
                         </div>
-                        
-                        {/* UPDATED: Removed the unnecessary tabs */}
                         <form className="space-y-6" onSubmit={handleLogin}>
-                            <div>
-                                <input 
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    value={email} 
-                                    onChange={e => setEmail(e.target.value)} 
-                                    className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent transition-all" />
+                            <div className="animate-fade-in-up">
+                                <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent transition-all" />
                             </div>
-                            <div>
+                            <div className="animate-fade-in-up">
                                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent transition-all" />
                             </div>
-                            <div className="text-right">
+                            <div className="text-right animate-fade-in-up">
                                 <a href="/setup-totp" className="text-sm text-placeholder hover:text-accent transition-colors">Forgot Password?</a>
                             </div>
-                            <button type="submit" disabled={isLoading} className="w-full bg-accent text-white rounded-lg py-3 font-semibold hover:bg-purple-500 transition-all transform hover:scale-105 disabled:opacity-50 disabled:scale-100">
-                                {isLoading ? 'Logging in...' : 'Log in'}
-                            </button>
+                            <div className="animate-fade-in-up">
+                                <button type="submit" disabled={isLoading} className="w-full bg-accent text-white rounded-lg py-3 font-semibold hover:bg-purple-500 transition-all transform hover:scale-105 disabled:opacity-50 disabled:scale-100">
+                                    {isLoading ? 'Logging in...' : 'Log in'}
+                                </button>
+                            </div>
                             {error && (
-                                <div className="mt-4 p-3 bg-input-bg border border-red-500/50 rounded-lg text-center">
+                                <div className="mt-4 p-3 bg-input-bg border border-red-500/50 rounded-lg text-center animate-fade-in-up">
                                     <p className="text-red-400 font-semibold">{error}</p>
                                 </div>
                             )}
