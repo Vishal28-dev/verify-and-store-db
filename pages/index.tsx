@@ -55,6 +55,8 @@ export default function LoginPage() {
             <main className="min-h-screen flex items-center justify-center p-4 font-inter">
                 <div className="max-w-[1000px] w-full bg-card-bg rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-[45%_55%] animate-fade-in-up">
                     
+                    {/* --- THIS IS THE FIX --- */}
+                    {/* The "hidden lg:block" classes hide this section on mobile phones */}
                     <div className="relative h-64 lg:h-auto hidden lg:block">
                         <div className="absolute inset-0 bg-purple-900 bg-opacity-70 z-10"></div>
                         <img src={wallpapers[currentIndex]} alt="Background" className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out" key={currentIndex} />
@@ -71,8 +73,8 @@ export default function LoginPage() {
 
                     <div className="p-8 lg:p-12">
                         <div className="mb-8">
-                            <h1 className="text-white text-2xl lg:text-3xl font-semibold mb-2 animate-fade-in-up">Welcome Back</h1>
-                            <p className="text-placeholder animate-fade-in-up">
+                            <h1 className="text-white text-2xl lg:text-3xl font-semibold mb-2">Welcome Back</h1>
+                            <p className="text-placeholder">
                                 Don't have an account?{' '}
                                 <a href="/register" className="text-accent hover:underline">Sign up</a>
                             </p>
