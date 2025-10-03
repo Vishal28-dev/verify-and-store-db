@@ -1,11 +1,14 @@
-import { AppProps } from "next/app";
-import "../styles/globals.css";
-import NextNProgress from "nextjs-progressbar";
+import type { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <NextNProgress color="#000" options={{ showSpinnner: false }} />
+      {/* The fix is to remove the "options" prop.
+        I also updated the color to match your site's theme.
+      */}
+      <NextNProgress color="#8a63d2" />
       <Component {...pageProps} />
     </>
   );
