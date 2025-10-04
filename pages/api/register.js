@@ -7,14 +7,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, selectedLength } = req.body;
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !selectedLength) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
 
-    // --- NEW: Check for duplicate firstName and password combination ---
-    const { data: existingUser, error: existingUserError } = await supabase
+    // Check for duplicate firstName and password combination
+    const { data: existingUser } = await supabase
       .from('users')
       .select('id')
       .eq('firstName', firstName)
@@ -24,19 +24,17 @@ export default async function handler(req, res) {
     if (existingUser) {
       return res.status(409).json({ error: 'This name and generated password combination already exists. Please try a different password length.' });
     }
-    // --- End of new check ---
-
-
     const { data, error } = await supabase
       .from('users')
       .insert([
-        { firstName, lastName, email, password },
+        { firstName, lastName, email, password, password_length: selectedLength },
       ])
       .select();
 
     if (error) {
       console.error('Supabase error:', error.message);
-      if (error.code === '23505') { // This handles duplicate emails
+     
+      if (error.code === '23505') { 
           return res.status(409).json({ error: 'An account with this email already exists.' });
       }
       return res.status(500).json({ error: 'Could not create account.' });
@@ -45,6 +43,7 @@ export default async function handler(req, res) {
     return res.status(201).json({ message: 'Account created successfully!', user: data });
 
   } catch (e) {
+   
     console.error('Server error:', e.message);
     return res.status(500).json({ error: 'An unexpected error occurred.' });
   }

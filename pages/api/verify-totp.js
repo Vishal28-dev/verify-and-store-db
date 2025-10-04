@@ -14,7 +14,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email and token are required.' });
     }
 
-    // --- Find the user and their saved TOTP secret ---
     const { data: user, error: findError } = await supabase
       .from('users')
       .select('totp_secret')
@@ -25,19 +24,16 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Invalid email or token.' });
     }
 
-    // --- Verify the token submitted by the user ---
     const verified = speakeasy.totp.verify({
       secret: user.totp_secret,
       encoding: 'base32',
       token: token,
     });
 
-    // If the token is not valid
     if (!verified) {
       return res.status(401).json({ error: 'Invalid email or token.' });
     }
 
-    // If the token is valid, login is successful
     return res.status(200).json({ message: 'Login successful!' });
 
   } catch (e) {

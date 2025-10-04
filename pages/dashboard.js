@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 
-// A function to draw a star shape for our confetti
 const drawStar = (ctx) => {
   const numPoints = 5;
   const outerRadius = 10;
@@ -38,7 +37,7 @@ export default function DashboardPage() {
   return (
     <>
       <Head>
-        <title>Welcome! - AMU</title>
+        <title>Welcome! - </title>
         {/* This is where the new font is imported */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
@@ -60,7 +59,7 @@ export default function DashboardPage() {
         <div className="text-center z-10 animate-fade-in-up">
           <h1 
             className="text-6xl lg:text-8xl font-bold text-accent mb-4" 
-            // This is where the new font is applied
+            
             style={{ fontFamily: "'Pacifico', cursive" }}
           >
             Welcome, {name || 'User'}!

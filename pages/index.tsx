@@ -49,14 +49,12 @@ export default function LoginPage() {
     return (
         <>
             <Head>
-                <title>Login - AMU</title>
+                <title>Password Generator</title>
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
             </Head>
             <main className="min-h-screen flex items-center justify-center p-4 font-inter">
                 <div className="max-w-[1000px] w-full bg-card-bg rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-[45%_55%] animate-fade-in-up">
                     
-                    {/* --- THIS IS THE FIX --- */}
-                    {/* The "hidden lg:block" classes hide this section on mobile phones */}
                     <div className="relative h-64 lg:h-auto hidden lg:block">
                         <div className="absolute inset-0 bg-purple-900 bg-opacity-70 z-10"></div>
                         <img src={wallpapers[currentIndex]} alt="Background" className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out" key={currentIndex} />
@@ -86,9 +84,11 @@ export default function LoginPage() {
                             <div className="animate-fade-in-up">
                                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full bg-input-bg border border-border rounded-lg px-4 py-3 text-white placeholder-placeholder focus:outline-none focus:ring-2 focus:ring-accent transition-all" />
                             </div>
+                            
                             <div className="text-right animate-fade-in-up">
-                                <a href="/setup-totp" className="text-sm text-placeholder hover:text-accent transition-colors">Forgot Password?</a>
+                                <a href="/setup-totp" className="text-sm text-placeholder hover:text-accent transition-colors">Forgot Password? (TOTP)</a>
                             </div>
+
                             <div className="animate-fade-in-up">
                                 <button type="submit" disabled={isLoading} className="w-full bg-accent text-white rounded-lg py-3 font-semibold hover:bg-purple-500 transition-all transform hover:scale-105 disabled:opacity-50 disabled:scale-100">
                                     {isLoading ? 'Logging in...' : 'Log in'}

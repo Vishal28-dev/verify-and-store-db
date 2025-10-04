@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 export default function LoginWithTotpPage() {
     const [email, setEmail] = useState('');
-    const [token, setToken] = useState(''); // This will hold the 6-digit code
+    const [token, setToken] = useState(''); 
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
@@ -29,7 +29,7 @@ export default function LoginWithTotpPage() {
                 throw new Error(data.error || 'Login failed.');
             }
 
-            // If login is successful, redirect to the dashboard
+          
             router.push('/dashboard');
 
         } catch (err) {
@@ -42,7 +42,7 @@ export default function LoginWithTotpPage() {
     return (
         <>
             <Head>
-                <title>Login with Authenticator - AMU</title>
+                <title>Password Generator </title>
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
             </Head>
             <main className="min-h-screen flex items-center justify-center p-4 font-inter">
